@@ -1,0 +1,166 @@
+﻿<Window x:Class="GestorProductosWPF_Ap1_Ap2_P4.AgregarProducto"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GestorProductosWPF_Ap1_Ap2_P4"
+        mc:Ignorable="d"
+        Title="Agregar Producto" Height="470" Width="760" MinHeight="430" MinWidth="640"
+        WindowStartupLocation="CenterOwner"
+        Background="#EEF5FC" FontFamily="Segoe UI">
+
+    <Window.Resources>
+        <!-- Paleta en azules claros -->
+        <SolidColorBrush x:Key="FondoTarjetaBrush" Color="#FFFFFF"/>
+        <SolidColorBrush x:Key="BordeSuaveBrush" Color="#C7DDF2"/>
+        <SolidColorBrush x:Key="AzulPrimarioBrush" Color="#3B82F6"/>
+        <SolidColorBrush x:Key="AzulPrimarioHoverBrush" Color="#2563EB"/>
+        <SolidColorBrush x:Key="TextoOscuroBrush" Color="#1E3A5F"/>
+        <SolidColorBrush x:Key="TextoSecundarioBrush" Color="#527194"/>
+
+        <!-- Estilo de tarjeta -->
+        <Style x:Key="TarjetaAzul" TargetType="Border">
+            <Setter Property="Background" Value="{StaticResource FondoTarjetaBrush}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BordeSuaveBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="Padding" Value="18"/>
+        </Style>
+
+        <!-- Estilo de etiquetas de campo -->
+        <Style x:Key="EtiquetaCampo" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{StaticResource TextoOscuroBrush}"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+
+        <!-- Estilo de cuadros de texto -->
+        <Style x:Key="CampoTextoAzul" TargetType="TextBox">
+            <Setter Property="Height" Value="32"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="8,0"/>
+            <Setter Property="Background" Value="#FAFCFF"/>
+            <Setter Property="Foreground" Value="{StaticResource TextoOscuroBrush}"/>
+            <Setter Property="BorderBrush" Value="#BFD7EA"/>
+            <Setter Property="BorderThickness" Value="1"/>
+        </Style>
+
+        <!-- Estilo de botón principal -->
+        <Style x:Key="BtnAzulPrincipal" TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource AzulPrimarioBrush}"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="BtnBorder"
+                                Background="{TemplateBinding Background}"
+                                CornerRadius="7"
+                                Padding="14,8">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="BtnBorder" Property="Background" Value="{StaticResource AzulPrimarioHoverBrush}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Encabezado -->
+        <StackPanel Grid.Row="0" Margin="2,0,2,12">
+            <TextBlock Text="Nuevo producto" FontSize="19" FontWeight="Bold" Foreground="{StaticResource TextoOscuroBrush}"/>
+            <TextBlock Text="Completa los datos del producto para añadirlo al inventario." FontSize="12" Foreground="{StaticResource TextoSecundarioBrush}"/>
+        </StackPanel>
+
+        <!-- Contenido principal -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1.35*"/>
+                <ColumnDefinition Width="16"/>
+                <ColumnDefinition Width="0.85*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Tarjeta izquierda: formulario -->
+            <Border Grid.Column="0" Style="{StaticResource TarjetaAzul}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="135"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="44"/>
+                        <RowDefinition Height="44"/>
+                        <RowDefinition Height="44"/>
+                        <RowDefinition Height="44"/>
+                        <RowDefinition Height="44"/>
+                        <RowDefinition Height="44"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Id -->
+                    <TextBlock x:Name="txtId" Grid.Row="0" Grid.Column="0" Text="Id" Style="{StaticResource EtiquetaCampo}"/>
+                    <TextBox x:Name="textId" Grid.Row="0" Grid.Column="1" Style="{StaticResource CampoTextoAzul}" TextWrapping="Wrap"/>
+
+                    <!-- Nombre -->
+                    <TextBlock x:Name="txtNombre" Grid.Row="1" Grid.Column="0" Text="Nombre" Style="{StaticResource EtiquetaCampo}"/>
+                    <TextBox x:Name="textNombre" Grid.Row="1" Grid.Column="1" Style="{StaticResource CampoTextoAzul}" TextWrapping="Wrap"/>
+
+                    <!-- Código de Barras -->
+                    <TextBlock x:Name="txtCadigoBarras" Grid.Row="2" Grid.Column="0" Text="Codigo Barras" Style="{StaticResource EtiquetaCampo}" TextWrapping="Wrap"/>
+                    <TextBox x:Name="textCodigoBarras" Grid.Row="2" Grid.Column="1" Style="{StaticResource CampoTextoAzul}" TextWrapping="Wrap"/>
+
+                    <!-- Categoría -->
+                    <TextBlock x:Name="txtCategoria" Grid.Row="3" Grid.Column="0" Text="Categoria" Style="{StaticResource EtiquetaCampo}"/>
+                    <TextBox x:Name="textCategoria" Grid.Row="3" Grid.Column="1" Style="{StaticResource CampoTextoAzul}" TextWrapping="Wrap"/>
+
+                    <!-- Precio -->
+                    <TextBlock x:Name="txtPrecio" Grid.Row="4" Grid.Column="0" Text="Precio" Style="{StaticResource EtiquetaCampo}"/>
+                    <TextBox x:Name="textPrecio" Grid.Row="4" Grid.Column="1" Style="{StaticResource CampoTextoAzul}" TextWrapping="Wrap"/>
+
+                    <!-- Stock -->
+                    <TextBlock x:Name="txtStock" Grid.Row="5" Grid.Column="0" Text="Stock" Style="{StaticResource EtiquetaCampo}"/>
+                    <TextBox x:Name="textStock" Grid.Row="5" Grid.Column="1" Style="{StaticResource CampoTextoAzul}" TextWrapping="Wrap"/>
+                </Grid>
+            </Border>
+
+            <!-- Tarjeta derecha: acción y guía -->
+            <Border Grid.Column="2" Style="{StaticResource TarjetaAzul}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Border Grid.Row="0" Background="#F4F9FF" BorderBrush="#D6E8FA" BorderThickness="1" CornerRadius="8" Padding="12" Margin="0,0,0,14">
+                        <StackPanel VerticalAlignment="Center">
+                            <TextBlock Text="Recomendación" FontSize="13" FontWeight="SemiBold" Foreground="{StaticResource TextoOscuroBrush}" Margin="0,0,0,6"/>
+                            <TextBlock Text="Verifica que el precio y el stock sean valores numéricos válidos antes de guardar."
+                                       FontSize="12" Foreground="{StaticResource TextoSecundarioBrush}" TextWrapping="Wrap"/>
+                        </StackPanel>
+                    </Border>
+
+                    <Button x:Name="btnGuardar"
+                            Grid.Row="1"
+                            Content="Guardar"
+                            Style="{StaticResource BtnAzulPrincipal}"
+                            Height="48"
+                            Click="btnGuardar_Click"/>
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+</Window>
